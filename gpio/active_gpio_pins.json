@@ -1,0 +1,22 @@
+[
+  {
+    "gpioNumber": 29,
+    "switchName": "test switch"
+  },
+  {
+    "gpioNumber": 31,
+    "switchName": ""
+  },
+  {
+    "gpioNumber": 33,
+    "switchName": ""
+  },
+  {
+    "gpioNumber": 35,
+    "switchName": ""
+  },
+  {
+    "gpioNumber": 37,
+    "switchName": ""
+  }
+]
