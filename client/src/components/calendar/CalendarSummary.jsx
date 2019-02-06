@@ -41,7 +41,7 @@ const CalendarSummary = ({ date, time }) => (
       {date.el}, {date.year}
     </div>
     <div>
-      {time.hr}:{time.min} {time.sec}
+      {time}
     </div>
     <Title>Upcoming events</Title>
     <Hr />

@@ -4,6 +4,17 @@ import styled from 'styled-components'
 //  icons
 import weatherIcons from './sub_components/weather_icons'
 
+//  Days list
+const daysList = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+]
+
 //  styled components
 const Wrapper = styled.div`
   position: fixed;
@@ -60,8 +71,12 @@ const Content = styled.div`
   grid-template-columns: repeat(3, 1fr);
 
   position: relative;
-  top: 40%;
+  top: 50%;
   transform: translate(0, -50%);
+
+  & > div {
+    padding: 0 15px;
+  }
 
   & hr {
     width: 75%;
@@ -73,11 +88,12 @@ const Content = styled.div`
   }
 `
 
-const Centered = styled.div`
-  width: max-content;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
+const Metric = styled.div`
+  display: grid;
+  grid-template-columns: auto max-content;
+
+  font-size: 14px;
+  margin-bottom: 3px;
 `
 
 const ForecastGrid = styled.div`
@@ -100,6 +116,10 @@ const ForecastItem = styled.div`
       width: 50px;
       height: 50px;
     }
+  }
+
+  & > div:nth-child(3) {
+    font-size: 13px;
   }
 `
 
@@ -134,54 +154,79 @@ const WeatherDetails = ({ weather }) => {
         <div>
           <Content>
             <div>
-              <Centered>
-                <div>Precipitation</div>
-                <hr />
+              <div>Precipitation</div>
+              <hr />
+              <Metric>
                 <div>
-                  Chance of {!weather ? null : weatherToday.precipType}:{' '}
+                  Chance of {!weather ? null : weatherToday.precipType}:
+                </div>
+                <div>
                   {!weather
                     ? null
                     : Math.round(weather.daily.data[0].precipProbability * 100)}
                   %
                 </div>
+              </Metric>
+              <Metric>
+                <div>Time:</div>
                 <div>
-                  Time:{' '}
                   {!weather
                     ? null
                     : new Date(
-                        weatherToday.precipIntensityMaxTime
+                        weatherToday.precipIntensityMaxTime * 1000
                       ).toLocaleTimeString()}
                 </div>
+              </Metric>
+              <Metric>
+                <div>Cloud Cover:</div>
                 <div>
-                  Cloud Cover:{' '}
+                  {!weather ? null : Math.round(weatherToday.cloudCover * 100)}%
+                </div>
+              </Metric>
+            </div>
+
+
+
+            <div>
+              <div>Wind</div>
+              <hr />
+              <Metric>
+                <div>Speed:</div>
+                <div>
                   {!weather
                     ? null
-                    : Math.round(weatherToday.cloudCover * 100)}%
+                    : weatherToday.windSpeed.toFixed(1)} km/h
                 </div>
-              </Centered>
+              </Metric>
+              <Metric>
+                <div>Gusts:</div>
+                <div>
+                  {!weather
+                    ? null
+                    : weatherToday.windGust.toFixed(1)} km/h
+                </div>
+              </Metric>
             </div>
 
             <div>
-              <Centered>CENTER</Centered>
-            </div>
-
-            <div>
-              <Centered>
-                <div>Day / Night</div>
-                <hr />
+              <div>Day / Night</div>
+              <hr />
+              <Metric>
+                <div>Sunrise:</div>
                 <div>
-                  Sunrise:{' '}
                   {!weather
                     ? null
-                    : new Date(weatherToday.sunriseTime).toLocaleTimeString()}
+                    : new Date(weatherToday.sunriseTime * 1000).toLocaleTimeString()}
                 </div>
+              </Metric>
+              <Metric>
+                <div>Sunset:</div>
                 <div>
-                  Sunset:{' '}
                   {!weather
                     ? null
-                    : new Date(weatherToday.sunsetTime).toLocaleTimeString()}
+                    : new Date(weatherToday.sunsetTime * 1000).toLocaleTimeString()}
                 </div>
-              </Centered>
+              </Metric>
             </div>
           </Content>
         </div>
@@ -189,10 +234,10 @@ const WeatherDetails = ({ weather }) => {
           <ForecastGrid>
             {// eslint-disable-next-line
             weather.daily.data.map((el, i) => {
-              if (i < 4) {
+              if (0 < i && i < 5) {
                 return (
                   <ForecastItem key={i}>
-                    <div>tomorrow</div>
+                    <div>{i === 1 ? "Tomorrow" : daysList[new Date(el.time * 1000).getDay()]}</div>
                     <div>
                       <img src={weatherIcons[el.icon]} alt="icon" />
                     </div>

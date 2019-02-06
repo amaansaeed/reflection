@@ -1,7 +1,7 @@
 [
   {
     "gpioNumber": 29,
-    "switchName": "Entrance light"
+    "switchName": "Entrance Light"
   },
   {
     "gpioNumber": 31,

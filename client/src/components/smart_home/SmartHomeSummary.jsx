@@ -51,14 +51,14 @@ const On = styled.div`
   padding: 4px 7px;
   border-radius: 3px;
   /* background: green; */
-  background: rgba(0, 255, 0, 0.3);
+  background: rgba(0, 255, 0, 0.15);
 `
 
 const Off = styled.div`
   padding: 3px 5px;
   border-radius: 3px;
   /* background: red; */
-  background: rgba(255, 0, 0, 0.3);
+  background: rgba(255, 0, 0, 0.15);
 `
 
 const SmartHomeSummary = ({ relays, handleClick }) => {

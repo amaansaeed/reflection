@@ -51,7 +51,7 @@ const NewsDetails = ({ news }) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <Title>News</Title>
+        <Title>Globe and Mail</Title>
         <Hr />
         <Content>
           {!news

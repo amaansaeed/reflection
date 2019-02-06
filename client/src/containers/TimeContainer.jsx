@@ -64,7 +64,7 @@ const Wrapper = WrappedComponent => {
   class TimeContainer extends Component {
     clock
     state = {
-      time: getTime(),
+      time: new Date().toLocaleTimeString(),
       date: getDate(),
       day: getDay()
     }
@@ -74,7 +74,7 @@ const Wrapper = WrappedComponent => {
 
     componentDidMount = () => {
       this.clock = setInterval(() => {
-        this.setState({ time: getTime(), date: getDate(), day: getDay() })
+        this.setState({ time: new Date().toLocaleTimeString(), date: getDate(), day: getDay() })
       }, 1 * 1000)
     }
 
