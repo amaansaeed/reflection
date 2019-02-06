@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 //  Middelware
-const checkHeader = require('../middleware/checkHeader')
+const checkHeader = require('../middleware/check_header')
 
 //  API services
-const darkSky = require('../services/darkSky')
+const darkSky = require('../services/dark_sky')
 const news = require('../services/news')
 
 //  SmartHome services

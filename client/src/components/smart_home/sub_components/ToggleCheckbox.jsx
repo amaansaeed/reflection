@@ -3,8 +3,8 @@ import styled from "styled-components"
 
 //  styled componets
 const PreSwitch = styled.div`
-  width: 180px;
-  height: 55px;
+  width: 120px;
+  height: 35px;
   position: relative;
 `
 
@@ -24,8 +24,8 @@ const Label = styled.label`
 
 const I = styled.i`
   display: block;
-  height: 51px;
-  width: 51px;
+  height: 32px;
+  width: 32px;
   position: absolute;
   left: 2px;
   top: 2px;
@@ -43,7 +43,7 @@ const Span = styled.span`
   display: inline-block;
   position: absolute;
   right: 0px;
-  top: 17px;
+  top: 9px;
   width: 18px;
   height: 18px;
   border-radius: 10px;
@@ -76,7 +76,7 @@ const Switch = styled(PreSwitch)`
     display: inline-block;
     position: absolute;
     right: 0px;
-    top: 17px;
+    top: 9px;
     width: 18px;
     height: 18px;
     border-radius: 10px;

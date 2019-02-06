@@ -1,22 +1,22 @@
 [
   {
     "gpioNumber": 29,
-    "switchName": "test switch"
+    "switchName": "Entrance light"
   },
   {
     "gpioNumber": 31,
-    "switchName": ""
+    "switchName": "Living Room Lamp 1"
   },
   {
     "gpioNumber": 33,
-    "switchName": ""
+    "switchName": "Living Room Lamp 2"
   },
   {
     "gpioNumber": 35,
-    "switchName": ""
+    "switchName": "Bedside Lamp"
   },
   {
     "gpioNumber": 37,
-    "switchName": ""
+    "switchName": "Air-conditioning"
   }
 ]

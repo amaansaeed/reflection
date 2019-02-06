@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 //  components
-import ToggleCheckBox from "./sub-components/ToggleCheckbox"
+import ToggleCheckBox from "./sub_components/ToggleCheckbox"
 
 //  styled components
 const Wrapper = styled.div`
@@ -38,12 +38,12 @@ const Content = styled.div`
 const Switch = styled.div`
   display: grid;
   grid-template-columns: auto max-content;
-  margin-bottom: 30px;
-  padding: 0 30px;
+  margin-bottom: 25px;
+  padding: 0 50px;
 
   & > div:nth-child(1) div {
     /* text-align: right; */
-    font-size: 30px;
+    font-size: 20px;
     margin: 0px 20px;
     /* padding-left: 20px; */
 

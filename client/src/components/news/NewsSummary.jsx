@@ -33,6 +33,14 @@ const Hr = styled.hr`
 const Content = styled.div`
   max-height: 80%;
   overflow: scroll;
+
+  & hr {
+    width: 20px;
+    height: 1px;
+    border: none;
+    margin: 3px auto;
+    background: lightgray;
+  }
 `
 
 const NewsItem = styled.div`
@@ -48,7 +56,12 @@ const NewsSummary = ({ handleClick, news }) => {
         <Title>News</Title>
         <Hr />
         <Content>
-          {!news ? null : news.map((el, i) => <NewsItem key={i}>{el.title}</NewsItem>)}
+          {!news ? null : news.map((el, i) => (
+            <React.Fragment key={i}>
+              <NewsItem>{el.title}</NewsItem>
+              <hr />
+            </React.Fragment>
+          ))}
         </Content>
       </Wrapper>
     </React.Fragment>

@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
-//  sub-components
-import DaysForecast from "./sub-components/DaysForecast"
+//  icons
+import weatherIcons from './sub_components/weather_icons'
 
 //  styled components
 const Wrapper = styled.div`
@@ -15,104 +15,197 @@ const Wrapper = styled.div`
   width: 60vw;
   height: 70vh;
   padding: 30px 40px;
+
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+`
+
+const UpperGrid = styled.div`
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto max-content;
 `
 
 const Title = styled.div`
-  font-size: 30px;
-  text-align: center;
+  text-align: left;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+`
+
+const Subtitle = styled.div`
+  text-align: left;
+  font-size: 20px;
+  font-weight: 300;
 `
 
 const Hr = styled.div`
   width: 80%;
-  margin: auto;
+  /* margin: auto; */
+  margin-left: 0;
   border: none;
   height: 1px;
-  background: black;
+  background: lightslategray;
 `
 
-const Content = styled.div``
+const Icon = styled.div`
+  & img {
+    width: 100px;
+    height: 100px;
+  }
+`
 
-const UpperGrid = styled.div`
+const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+
+  position: relative;
+  top: 40%;
+  transform: translate(0, -50%);
+
+  & hr {
+    width: 75%;
+    margin-left: 0px;
+    margin-top: 5px;
+    height: 1px;
+    border: none;
+    background: lightslategray;
+  }
+`
+
+const Centered = styled.div`
+  width: max-content;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
 `
 
 const ForecastGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 `
 
-const Heading = styled.div`
+const ForecastItem = styled.div`
   text-align: center;
+
+  & > div:nth-child(1) {
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  & > div:nth-child(2) {
+    margin: 5px 0;
+
+    & img {
+      width: 50px;
+      height: 50px;
+    }
+  }
 `
 
 const WeatherDetails = ({ weather }) => {
+  const weatherToday = !weather ? null : weather.daily.data[0]
   return (
     <React.Fragment>
       <Wrapper>
-        <Title>Weather</Title>
-        <Hr />
-        <Content>
-          <UpperGrid>
+        <UpperGrid>
+          <div>
+            <Title>Toronto</Title>
+            <Subtitle>{!weather ? null : weatherToday.summary}</Subtitle>
+            <Hr />
+          </div>
+          <div>
+            <Icon>
+              <img
+                src={!weather ? null : weatherIcons[weather.currently.icon]}
+                alt="icon"
+              />
+            </Icon>
             <div>
-              <Heading>Currently</Heading>
-              <div>temperature: {!weather ? null : weather.currently.apparentTemperature}</div>
-              <div>summary: {!weather ? null : weather.currently.summary}</div>
-              <div>humidity: {!weather ? null : weather.currently.humidity}</div>
-              <div>visibility: {!weather ? null : weather.currently.visibility}</div>
-              <div>
-                precipitation chance: {!weather ? null : weather.currently.precipProbability * 100}%
-              </div>
-              <div>uv index: {!weather ? null : weather.currently.uvIndex}</div>
-              <div>wind bearing: {!weather ? null : weather.currently.windBearing}</div>
-              <div>wind gust: {!weather ? null : weather.currently.windGust}</div>
-              <div>wind speed: {!weather ? null : weather.currently.windSpeed}</div>
+              {!weather
+                ? null
+                : `Hi ${Math.round(
+                    weatherToday.apparentTemperatureHigh
+                  )} | Lo ${Math.round(weatherToday.apparentTemperatureLow)}`}
             </div>
-            <div>
-              <Heading>Today</Heading>
-              <div>
-                Temperature Hi: {!weather ? null : weather.daily.data[0].apparentTemperatureHigh}
-              </div>
-              <div>
-                Temperature Low: {!weather ? null : weather.daily.data[0].apparentTemperatureLow}
-              </div>
-              <div>Summary: {!weather ? null : weather.daily.data[0].summary}</div>
-              <div>
-                Precipitation chance:{" "}
-                {!weather ? null : weather.daily.data[0].precipProbability * 100}%
-              </div>
-              <div>Precipitation type: {!weather ? null : weather.daily.data[0].precipType}</div>
-              <div>
-                Precipitation time:{" "}
-                {!weather
-                  ? null
-                  : new Date(weather.daily.data[0].precipIntensityMaxTime).toLocaleTimeString()}
-              </div>
+          </div>
+        </UpperGrid>
 
-              <div>
-                sunrise:{" "}
-                {!weather ? null : new Date(weather.daily.data[0].sunriseTime).toLocaleTimeString()}
-              </div>
-              <div>
-                sunset:{" "}
-                {!weather ? null : new Date(weather.daily.data[0].sunsetTime).toLocaleTimeString()}
-              </div>
+        <div>
+          <Content>
+            <div>
+              <Centered>
+                <div>Precipitation</div>
+                <hr />
+                <div>
+                  Chance of {!weather ? null : weatherToday.precipType}:{' '}
+                  {!weather
+                    ? null
+                    : Math.round(weather.daily.data[0].precipProbability * 100)}
+                  %
+                </div>
+                <div>
+                  Time:{' '}
+                  {!weather
+                    ? null
+                    : new Date(
+                        weatherToday.precipIntensityMaxTime
+                      ).toLocaleTimeString()}
+                </div>
+                <div>
+                  Cloud Cover:{' '}
+                  {!weather
+                    ? null
+                    : Math.round(weatherToday.cloudCover * 100)}%
+                </div>
+              </Centered>
             </div>
-          </UpperGrid>
-          {!weather ? null : (
-            <ForecastGrid>
-              <DaysForecast day={weather.daily.data[1]} when="tomorrow" />
-              <DaysForecast
-                day={weather.daily.data[2]}
-                when={new Date(weather.daily.data[2].time).toLocaleDateString()}
-              />
-              <DaysForecast
-                day={weather.daily.data[3]}
-                when={new Date(weather.daily.data[3].time).toLocaleDateString()}
-              />
-            </ForecastGrid>
-          )}
-        </Content>
+
+            <div>
+              <Centered>CENTER</Centered>
+            </div>
+
+            <div>
+              <Centered>
+                <div>Day / Night</div>
+                <hr />
+                <div>
+                  Sunrise:{' '}
+                  {!weather
+                    ? null
+                    : new Date(weatherToday.sunriseTime).toLocaleTimeString()}
+                </div>
+                <div>
+                  Sunset:{' '}
+                  {!weather
+                    ? null
+                    : new Date(weatherToday.sunsetTime).toLocaleTimeString()}
+                </div>
+              </Centered>
+            </div>
+          </Content>
+        </div>
+        {!weather ? null : (
+          <ForecastGrid>
+            {// eslint-disable-next-line
+            weather.daily.data.map((el, i) => {
+              if (i < 4) {
+                return (
+                  <ForecastItem key={i}>
+                    <div>tomorrow</div>
+                    <div>
+                      <img src={weatherIcons[el.icon]} alt="icon" />
+                    </div>
+                    <div>
+                      Hi {Math.round(el.apparentTemperatureHigh)}° | Lo{' '}
+                      {Math.round(el.apparentTemperatureLow)}°
+                    </div>
+                  </ForecastItem>
+                )
+              }
+            })}
+          </ForecastGrid>
+        )}
       </Wrapper>
     </React.Fragment>
   )

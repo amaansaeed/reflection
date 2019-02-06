@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
 //  container
 
@@ -38,13 +38,27 @@ const Content = styled.div`
 `
 
 const Switch = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   display: grid;
   grid-template-columns: auto max-content;
+`
 
-  & div:nth-child(1) {
-    padding-right: 25px;
-  }
+const SwitchName = styled.div`
+  margin-right: 25px;
+`
+
+const On = styled.div`
+  padding: 4px 7px;
+  border-radius: 3px;
+  /* background: green; */
+  background: rgba(0, 255, 0, 0.3);
+`
+
+const Off = styled.div`
+  padding: 3px 5px;
+  border-radius: 3px;
+  /* background: red; */
+  background: rgba(255, 0, 0, 0.3);
 `
 
 const SmartHomeSummary = ({ relays, handleClick }) => {
@@ -57,10 +71,13 @@ const SmartHomeSummary = ({ relays, handleClick }) => {
           ? null
           : relays.map((relay, i) => (
               <Switch key={i}>
-                <div>
-                  {relay.switchName === "" ? `Switch ${relay.switchNumber}` : relay.switchName}:
-                </div>
-                <div>{relay.isOn ? "on" : "off"}</div>
+                <SwitchName>
+                  {relay.switchName === ''
+                    ? `Switch ${relay.switchNumber}`
+                    : relay.switchName}
+                  :
+                </SwitchName>
+                <div>{relay.isOn ? <On>on</On> : <Off>off</Off>}</div>
               </Switch>
             ))}
       </Content>

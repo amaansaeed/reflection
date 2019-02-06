@@ -33,15 +33,17 @@ const Content = styled.div`
 `
 
 const NewsItem = styled.div`
-  font-size: 13px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 
   & div:nth-child(1) {
+  font-size: 14px;
     font-weight: 500;
   }
 
   & div:nth-child(2) {
+  font-size: 13px;
     font-weight: 300;
+    line-height: 1.6em;
   }
 `
 
